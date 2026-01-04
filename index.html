@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>כוחות הצדיקים הנסתרים</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Heebo', sans-serif;
+        }
+        
+        body {
+            background: #FFF5F7;
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            color: #D4A574;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #888;
+            font-size: 1.1em;
+        }
+        
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .main-icon {
+            font-size: 80px;
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px #D4A574); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 30px #D4A574); }
+        }
+        
+        .info-box {
+            background: #fff;
+            border: 2px solid #D4A574;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .info-box p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1em;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #D4A574;
+            font-size: 1.3em;
+            margin: 30px 0 15px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 15px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+        
+        .power-button {
+            background: #fff;
+            border: 2px solid #FFB6C1;
+            border-radius: 20px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .power-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(212, 165, 116, 0.4);
+            background: #FFFAF5;
+        }
+        
+        .power-button.mint { border-color: #B8E6D4; }
+        .power-button.mint:hover { background: #F0FFF8; }
+        
+        .power-button.gold { border-color: #D4A574; }
+        .power-button.gold:hover { background: #FFFAF5; }
+        
+        .button-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .button-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .button-desc {
+            font-size: 0.85em;
+            color: #888;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #FFF5F7;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .overlay.active {
+            display: flex;
+        }
+        
+        .overlay-content {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .close-overlay {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #FFB6C1;
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .animation-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animation-text {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            min-height: 60px;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #FFE4EC;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            background: #FFB6C1;
+        }
+        
+        .completion-message {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #B8E6D4;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .completion-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .completion-message p {
+            color: #666;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .install-btn {
+            background: #FFB6C1;
+            border: none;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .install-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.5);
+        }
+        
+        .install-btn:disabled {
+            background: #ddd;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .quote-box {
+            background: #fff;
+            border: 2px solid #B8E6D4;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .quote-box p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .quote-box .source {
+            color: #D4A574;
+            font-style: normal;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>כוחות הצדיקים הנסתרים</h1>
+        <p>גילוי הכוחות העל-טבעיים שבתוכך</p>
+    </div>
+    
+    <div class="icon-container">
+        <span class="main-icon">👑</span>
+    </div>
+    
+    <div class="section-title">👁️ כוחות תפיסה</div>
+    <div class="buttons-grid">
+        <div class="power-button gold" onclick="startProcess('ruachHakodesh')">
+            <span class="button-icon">👁️</span>
+            <div class="button-title">רוח הקודש</div>
+            <div class="button-desc">ידיעת הנסתר והעתיד</div>
+        </div>
+        <div class="power-button" onclick="startProcess('telepathy')">
+            <span class="button-icon">🧠</span>
+            <div class="button-title">ידיעת מחשבות</div>
+            <div class="button-desc">כמו הבעל שם טוב</div>
+        </div>
+        <div class="power-button mint" onclick="startProcess('remoteVision')">
+            <span class="button-icon">🔮</span>
+            <div class="button-title">ראייה מרחוק</div>
+            <div class="button-desc">לראות מקומות רחוקים</div>
+        </div>
+        <div class="power-button gold" onclick="startProcess('prophecy')">
+            <span class="button-icon">📜</span>
+            <div class="button-title">חלומות נבואיים</div>
+            <div class="button-desc">גילויים בחלום</div>
+        </div>
+    </div>
+    
+    <div class="section-title">✨ כוחות השפעה</div>
+    <div class="buttons-grid">
+        <div class="power-button" onclick="startProcess('blessing')">
+            <span class="button-icon">🙌</span>
+            <div class="button-title">כוח הברכה</div>
+            <div class="button-desc">ברכות שמתגשמות</div>
+        </div>
+        <div class="power-button mint" onclick="startProcess('healing')">
+            <span class="button-icon">💚</span>
+            <div class="button-title">כוח הריפוי</div>
+            <div class="button-desc">ריפוי בכוח התפילה</div>
+        </div>
+        <div class="power-button gold" onclick="startProcess('prayer')">
+            <span class="button-icon">🙏</span>
+            <div class="button-title">תפילה נענית</div>
+            <div class="button-desc">תפילות שמתקבלות</div>
+        </div>
+        <div class="power-button" onclick="startProcess('nature')">
+            <span class="button-icon">🌊</span>
+            <div class="button-title">שינוי הטבע</div>
+            <div class="button-desc">ניסים גלויים</div>
+        </div>
+    </div>
+    
+    <div class="section-title">🚀 כוחות תנועה</div>
+    <div class="buttons-grid">
+        <div class="power-button mint" onclick="startProcess('kfitza')">
+            <span class="button-icon">⚡</span>
+            <div class="button-title">קפיצת הדרך</div>
+            <div class="button-desc">קיצור דרכים כמו הבעש"ט</div>
+        </div>
+        <div class="power-button gold" onclick="startProcess('astral')">
+            <span class="button-icon">🌙</span>
+            <div class="button-title">עליית נשמה</div>
+            <div class="button-desc">עלייה לעולמות עליונים</div>
+        </div>
+    </div>
+    
+    <div class="section-title">💎 כוחות פנימיים</div>
+    <div class="buttons-grid">
+        <div class="power-button" onclick="startProcess('faith')">
+            <span class="button-icon">💪</span>
+            <div class="button-title">אמונה שלמה</div>
+            <div class="button-desc">ביטחון מוחלט בה'</div>
+        </div>
+        <div class="power-button mint" onclick="startProcess('joy')">
+            <span class="button-icon">😊</span>
+            <div class="button-title">שמחה תמידית</div>
+            <div class="button-desc">שמחה שמעל הטבע</div>
+        </div>
+        <div class="power-button gold" onclick="startProcess('dvekut')">
+            <span class="button-icon">🔥</span>
+            <div class="button-title">דביקות בה'</div>
+            <div class="button-desc">התחברות לאינסוף</div>
+        </div>
+        <div class="power-button" onclick="startProcess('purity')">
+            <span class="button-icon">✨</span>
+            <div class="button-title">טהרת הנפש</div>
+            <div class="button-desc">ניקוי וזיכוך הנשמה</div>
+        </div>
+    </div>
+    
+    <div class="section-title">👑 כוחות עליונים</div>
+    <div class="buttons-grid">
+        <div class="power-button gold" onclick="startProcess('sevenWisdoms')">
+            <span class="button-icon">📚</span>
+            <div class="button-title">7 החכמות שבתורה</div>
+            <div class="button-desc">טעינת כל החכמות</div>
+        </div>
+        <div class="power-button" onclick="startProcess('removeHester')">
+            <span class="button-icon">🌅</span>
+            <div class="button-title">הסרת ההסתר</div>
+            <div class="button-desc">גילוי האור האלוקי</div>
+        </div>
+        <div class="power-button mint" onclick="startProcess('giluyEliyahu')">
+            <span class="button-icon">👤</span>
+            <div class="button-title">גילוי אליהו</div>
+            <div class="button-desc">לזכות לגילוי אליהו הנביא</div>
+        </div>
+        <div class="power-button gold" onclick="startProcess('allPowers')">
+            <span class="button-icon">👑</span>
+            <div class="button-title">כל הכוחות יחד</div>
+            <div class="button-desc">גילוי מלא של כל הכוחות</div>
+        </div>
+    </div>
+
+    <!-- Ruach Hakodesh Overlay -->
+    <div class="overlay" id="ruachHakodeshOverlay">
+        <button class="close-overlay" onclick="closeOverlay('ruachHakodesh')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="ruachHakodeshIcon">👁️</div>
+            <div class="animation-text" id="ruachHakodeshText">מתחברת לרוח הקודש...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="ruachHakodeshProgress"></div>
+            </div>
+            <button class="install-btn" id="ruachHakodeshBtn" onclick="runProcess('ruachHakodesh')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="ruachHakodeshComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ רוח הקודש התגלתה!</p>
+                <p>את מחוברת לידיעה העליונה.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Telepathy Overlay -->
+    <div class="overlay" id="telepathyOverlay">
+        <button class="close-overlay" onclick="closeOverlay('telepathy')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="telepathyIcon">🧠</div>
+            <div class="animation-text" id="telepathyText">מגלה את כוח ידיעת המחשבות...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="telepathyProgress"></div>
+            </div>
+            <button class="install-btn" id="telepathyBtn" onclick="runProcess('telepathy')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="telepathyComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח ידיעת המחשבות התגלה!</p>
+                <p>את חשה את הנסתר.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remote Vision Overlay -->
+    <div class="overlay" id="remoteVisionOverlay">
+        <button class="close-overlay" onclick="closeOverlay('remoteVision')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="remoteVisionIcon">🔮</div>
+            <div class="animation-text" id="remoteVisionText">מגלה את כוח הראייה מרחוק...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="remoteVisionProgress"></div>
+            </div>
+            <button class="install-btn" id="remoteVisionBtn" onclick="runProcess('remoteVision')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="remoteVisionComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח הראייה מרחוק התגלה!</p>
+                <p>עיניך רואות מעבר למקום.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prophecy Overlay -->
+    <div class="overlay" id="prophecyOverlay">
+        <button class="close-overlay" onclick="closeOverlay('prophecy')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="prophecyIcon">📜</div>
+            <div class="animation-text" id="prophecyText">מגלה את כוח החלומות הנבואיים...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="prophecyProgress"></div>
+            </div>
+            <button class="install-btn" id="prophecyBtn" onclick="runProcess('prophecy')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="prophecyComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח החלומות הנבואיים התגלה!</p>
+                <p>חלומותייך יגלו לך סודות.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blessing Overlay -->
+    <div class="overlay" id="blessingOverlay">
+        <button class="close-overlay" onclick="closeOverlay('blessing')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="blessingIcon">🙌</div>
+            <div class="animation-text" id="blessingText">מגלה את כוח הברכה...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="blessingProgress"></div>
+            </div>
+            <button class="install-btn" id="blessingBtn" onclick="runProcess('blessing')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="blessingComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח הברכה התגלה!</p>
+                <p>ברכותייך מתגשמות.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Healing Overlay -->
+    <div class="overlay" id="healingOverlay">
+        <button class="close-overlay" onclick="closeOverlay('healing')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="healingIcon">💚</div>
+            <div class="animation-text" id="healingText">מגלה את כוח הריפוי...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="healingProgress"></div>
+            </div>
+            <button class="install-btn" id="healingBtn" onclick="runProcess('healing')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="healingComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח הריפוי התגלה!</p>
+                <p>ידייך מביאות מרפא.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prayer Overlay -->
+    <div class="overlay" id="prayerOverlay">
+        <button class="close-overlay" onclick="closeOverlay('prayer')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="prayerIcon">🙏</div>
+            <div class="animation-text" id="prayerText">מגלה את כוח התפילה הנענית...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="prayerProgress"></div>
+            </div>
+            <button class="install-btn" id="prayerBtn" onclick="runProcess('prayer')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="prayerComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח התפילה הנענית התגלה!</p>
+                <p>תפילותייך נשמעות ומתקבלות.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nature Overlay -->
+    <div class="overlay" id="natureOverlay">
+        <button class="close-overlay" onclick="closeOverlay('nature')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="natureIcon">🌊</div>
+            <div class="animation-text" id="natureText">מגלה את כוח שינוי הטבע...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="natureProgress"></div>
+            </div>
+            <button class="install-btn" id="natureBtn" onclick="runProcess('nature')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="natureComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח שינוי הטבע התגלה!</p>
+                <p>את למעלה מהטבע.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kfitza Overlay -->
+    <div class="overlay" id="kfitzaOverlay">
+        <button class="close-overlay" onclick="closeOverlay('kfitza')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="kfitzaIcon">⚡</div>
+            <div class="animation-text" id="kfitzaText">מגלה את כוח קפיצת הדרך...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="kfitzaProgress"></div>
+            </div>
+            <button class="install-btn" id="kfitzaBtn" onclick="runProcess('kfitza')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="kfitzaComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח קפיצת הדרך התגלה!</p>
+                <p>המרחק והזמן נכנעים לך.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Astral Overlay -->
+    <div class="overlay" id="astralOverlay">
+        <button class="close-overlay" onclick="closeOverlay('astral')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="astralIcon">🌙</div>
+            <div class="animation-text" id="astralText">מגלה את כוח עליית הנשמה...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="astralProgress"></div>
+            </div>
+            <button class="install-btn" id="astralBtn" onclick="runProcess('astral')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="astralComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח עליית הנשמה התגלה!</p>
+                <p>נשמתך עולה לעולמות עליונים.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faith Overlay -->
+    <div class="overlay" id="faithOverlay">
+        <button class="close-overlay" onclick="closeOverlay('faith')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="faithIcon">💪</div>
+            <div class="animation-text" id="faithText">מגלה את כוח האמונה השלמה...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="faithProgress"></div>
+            </div>
+            <button class="install-btn" id="faithBtn" onclick="runProcess('faith')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="faithComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח האמונה השלמה התגלה!</p>
+                <p>ביטחונך בה' מושלם.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Joy Overlay -->
+    <div class="overlay" id="joyOverlay">
+        <button class="close-overlay" onclick="closeOverlay('joy')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="joyIcon">😊</div>
+            <div class="animation-text" id="joyText">מגלה את כוח השמחה התמידית...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="joyProgress"></div>
+            </div>
+            <button class="install-btn" id="joyBtn" onclick="runProcess('joy')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="joyComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח השמחה התמידית התגלה!</p>
+                <p>את במצב של שמחה תמידית.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dvekut Overlay -->
+    <div class="overlay" id="dvekutOverlay">
+        <button class="close-overlay" onclick="closeOverlay('dvekut')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="dvekutIcon">🔥</div>
+            <div class="animation-text" id="dvekutText">מגלה את כוח הדביקות...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="dvekutProgress"></div>
+            </div>
+            <button class="install-btn" id="dvekutBtn" onclick="runProcess('dvekut')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="dvekutComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח הדביקות התגלה!</p>
+                <p>את דבוקה באינסוף ברוך הוא.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purity Overlay -->
+    <div class="overlay" id="purityOverlay">
+        <button class="close-overlay" onclick="closeOverlay('purity')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="purityIcon">✨</div>
+            <div class="animation-text" id="purityText">מגלה את כוח טהרת הנפש...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="purityProgress"></div>
+            </div>
+            <button class="install-btn" id="purityBtn" onclick="runProcess('purity')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="purityComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח טהרת הנפש התגלה!</p>
+                <p>נשמתך טהורה וזכה.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Giluy Eliyahu Overlay -->
+    <div class="overlay" id="giluyEliyahuOverlay">
+        <button class="close-overlay" onclick="closeOverlay('giluyEliyahu')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="giluyEliyahuIcon">👤</div>
+            <div class="animation-text" id="giluyEliyahuText">מתכוננת לגילוי אליהו...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="giluyEliyahuProgress"></div>
+            </div>
+            <button class="install-btn" id="giluyEliyahuBtn" onclick="runProcess('giluyEliyahu')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="giluyEliyahuComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ הכנה לגילוי אליהו הושלמה!</p>
+                <p>את ראויה לגילוי אליהו הנביא.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seven Wisdoms Overlay -->
+    <div class="overlay" id="sevenWisdomsOverlay">
+        <button class="close-overlay" onclick="closeOverlay('sevenWisdoms')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="sevenWisdomsIcon">📚</div>
+            <div class="animation-text" id="sevenWisdomsText">מתחילה טעינת 7 החכמות...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="sevenWisdomsProgress"></div>
+            </div>
+            <button class="install-btn" id="sevenWisdomsBtn" onclick="runProcess('sevenWisdoms')">✨ טעני את החכמות</button>
+            <div class="completion-message" id="sevenWisdomsComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ 7 החכמות נטענו!</p>
+                <p>כל חכמות התורה בתוכך.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove Hester Overlay -->
+    <div class="overlay" id="removeHesterOverlay">
+        <button class="close-overlay" onclick="closeOverlay('removeHester')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="removeHesterIcon">🌅</div>
+            <div class="animation-text" id="removeHesterText">מתחילה הסרת ההסתר...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="removeHesterProgress"></div>
+            </div>
+            <button class="install-btn" id="removeHesterBtn" onclick="runProcess('removeHester')">✨ הסירי את ההסתר</button>
+            <div class="completion-message" id="removeHesterComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ ההסתר הוסר!</p>
+                <p>האור האלוקי מתגלה לך.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Powers Overlay -->
+    <div class="overlay" id="allPowersOverlay">
+        <button class="close-overlay" onclick="closeOverlay('allPowers')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="allPowersIcon">👑</div>
+            <div class="animation-text" id="allPowersText">מגלה את כל הכוחות יחד...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="allPowersProgress"></div>
+            </div>
+            <button class="install-btn" id="allPowersBtn" onclick="runProcess('allPowers')">✨ גלי את כל הכוחות</button>
+            <div class="completion-message" id="allPowersComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כל הכוחות התגלו!</p>
+                <p>את צדיקה נסתרת, כל הכוחות בתוכך.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const processStages = {
+            ruachHakodesh: [
+                { percent: 10, text: '🌟 מתחברת לשורש הנשמה...', icon: '🌟' },
+                { percent: 20, text: '💫 פותחת את עין הלב...', icon: '💫' },
+                { percent: 30, text: '🌟 מטהרת את כלי התפיסה...', icon: '🌟' },
+                { percent: 40, text: '✨ מתחברת לאור האינסוף...', icon: '✨' },
+                { percent: 50, text: '🔮 מקבלת את השפע העליון...', icon: '🔮' },
+                { percent: 60, text: '👁️ פותחת את ערוצי הידיעה...', icon: '👁️' },
+                { percent: 70, text: '💎 מזככת את הראייה הפנימית...', icon: '💎' },
+                { percent: 80, text: '🌙 מתחברת לחכמה העליונה...', icon: '🌙' },
+                { percent: 90, text: '⭐ משלימה את הגילוי...', icon: '⭐' },
+                { percent: 100, text: '✅ רוח הקודש התגלתה!', icon: '👁️' }
+            ],
+            telepathy: [
+                { percent: 10, text: '🧠 מתחברת לתודעה העליונה...', icon: '🧠' },
+                { percent: 20, text: '💫 פותחת את החושים הרוחניים...', icon: '💫' },
+                { percent: 30, text: '🌟 מכוונת לקליטת מחשבות...', icon: '🌟' },
+                { percent: 40, text: '✨ מחברת לב ללב...', icon: '✨' },
+                { percent: 50, text: '🔮 קולטת את הנסתר...', icon: '🔮' },
+                { percent: 60, text: '💎 מחדדת את הרגישות...', icon: '💎' },
+                { percent: 70, text: '🌙 מתחברת כמו הבעש"ט...', icon: '🌙' },
+                { percent: 80, text: '⭐ מעמיקה את הקליטה...', icon: '⭐' },
+                { percent: 90, text: '👁️ משלימה את הגילוי...', icon: '👁️' },
+                { percent: 100, text: '✅ כוח ידיעת המחשבות התגלה!', icon: '🧠' }
+            ],
+            remoteVision: [
+                { percent: 10, text: '🔮 פותחת את עין הנשמה...', icon: '🔮' },
+                { percent: 20, text: '💫 מרחיבה את שדה הראייה...', icon: '💫' },
+                { percent: 30, text: '🌟 מתחברת לכל המקומות...', icon: '🌟' },
+                { percent: 40, text: '✨ עוברת את גבולות המרחק...', icon: '✨' },
+                { percent: 50, text: '👁️ רואה מעבר לאופק...', icon: '👁️' },
+                { percent: 60, text: '💎 מחדדת את הראייה...', icon: '💎' },
+                { percent: 70, text: '🌙 מתחברת כמו אלישע הנביא...', icon: '🌙' },
+                { percent: 80, text: '⭐ רואה בכל מקום...', icon: '⭐' },
+                { percent: 90, text: '🔮 משלימה את הגילוי...', icon: '🔮' },
+                { percent: 100, text: '✅ כוח הראייה מרחוק התגלה!', icon: '🔮' }
+            ],
+            prophecy: [
+                { percent: 10, text: '📜 מתחברת לעולם החלומות...', icon: '📜' },
+                { percent: 20, text: '🌙 פותחת את שערי הלילה...', icon: '🌙' },
+                { percent: 30, text: '💫 מכינה את הנשמה לגילוי...', icon: '💫' },
+                { percent: 40, text: '✨ מתחברת לעולמות עליונים...', icon: '✨' },
+                { percent: 50, text: '👁️ פותחת את עין הנבואה...', icon: '👁️' },
+                { percent: 60, text: '🔮 מקבלת הארות בחלום...', icon: '🔮' },
+                { percent: 70, text: '💎 מזככת את הקליטה...', icon: '💎' },
+                { percent: 80, text: '⭐ רואה את העתיד...', icon: '⭐' },
+                { percent: 90, text: '📜 משלימה את הגילוי...', icon: '📜' },
+                { percent: 100, text: '✅ כוח החלומות הנבואיים התגלה!', icon: '📜' }
+            ],
+            blessing: [
+                { percent: 10, text: '🙌 מתחברת לכוח הברכה...', icon: '🙌' },
+                { percent: 20, text: '💫 פותחת את ערוצי השפע...', icon: '💫' },
+                { percent: 30, text: '🌟 מקבלת כוח מהצדיקים...', icon: '🌟' },
+                { percent: 40, text: '✨ ממלאה את הידיים באור...', icon: '✨' },
+                { percent: 50, text: '💎 מחזקת את כוח הדיבור...', icon: '💎' },
+                { percent: 60, text: '🙏 מתחברת לשורש הברכות...', icon: '🙏' },
+                { percent: 70, text: '⭐ מעצימה את ההשפעה...', icon: '⭐' },
+                { percent: 80, text: '🌙 ברכותייך נשמעות למעלה...', icon: '🌙' },
+                { percent: 90, text: '🙌 משלימה את הגילוי...', icon: '🙌' },
+                { percent: 100, text: '✅ כוח הברכה התגלה!', icon: '🙌' }
+            ],
+            healing: [
+                { percent: 10, text: '💚 מתחברת לכוח הריפוי...', icon: '💚' },
+                { percent: 20, text: '💫 פותחת את ערוצי המרפא...', icon: '💫' },
+                { percent: 30, text: '🌟 מקבלת אור ריפוי...', icon: '🌟' },
+                { percent: 40, text: '✨ ממלאה את הידיים באנרגיה...', icon: '✨' },
+                { percent: 50, text: '💎 כמו רבי חנינא בן דוסא...', icon: '💎' },
+                { percent: 60, text: '🙏 מתחברת לרופא כל בשר...', icon: '🙏' },
+                { percent: 70, text: '⭐ מעבירה אור מרפא...', icon: '⭐' },
+                { percent: 80, text: '💚 מחזקת את כוח הריפוי...', icon: '💚' },
+                { percent: 90, text: '🌙 משלימה את הגילוי...', icon: '🌙' },
+                { percent: 100, text: '✅ כוח הריפוי התגלה!', icon: '💚' }
+            ],
+            prayer: [
+                { percent: 10, text: '🙏 מתחברת לכוח התפילה...', icon: '🙏' },
+                { percent: 20, text: '💫 פותחת את שערי שמים...', icon: '💫' },
+                { percent: 30, text: '🌟 מעלה את התפילות...', icon: '🌟' },
+                { percent: 40, text: '✨ מתחברת לכסא הכבוד...', icon: '✨' },
+                { percent: 50, text: '💎 כמו הצדיקים הגדולים...', icon: '💎' },
+                { percent: 60, text: '⭐ תפילותייך בוקעות רקיעים...', icon: '⭐' },
+                { percent: 70, text: '🌙 נשמעות ומתקבלות...', icon: '🌙' },
+                { percent: 80, text: '🙏 מחזקת את כוח התפילה...', icon: '🙏' },
+                { percent: 90, text: '💫 משלימה את הגילוי...', icon: '💫' },
+                { percent: 100, text: '✅ כוח התפילה הנענית התגלה!', icon: '🙏' }
+            ],
+            nature: [
+                { percent: 10, text: '🌊 מתחברת לכוח שינוי הטבע...', icon: '🌊' },
+                { percent: 20, text: '💫 עולה מעל חוקי הטבע...', icon: '💫' },
+                { percent: 30, text: '🌟 כמו משה רבינו...', icon: '🌟' },
+                { percent: 40, text: '✨ הטבע נכנע לך...', icon: '✨' },
+                { percent: 50, text: '💎 כמו הבעל שם טוב...', icon: '💎' },
+                { percent: 60, text: '🔥 שולטת ביסודות...', icon: '🔥' },
+                { percent: 70, text: '🌊 המים נפתחים לפנייך...', icon: '🌊' },
+                { percent: 80, text: '⭐ ניסים מתרחשים סביבך...', icon: '⭐' },
+                { percent: 90, text: '🌙 משלימה את הגילוי...', icon: '🌙' },
+                { percent: 100, text: '✅ כוח שינוי הטבע התגלה!', icon: '🌊' }
+            ],
+            kfitza: [
+                { percent: 10, text: '⚡ מתחברת לכוח קפיצת הדרך...', icon: '⚡' },
+                { percent: 20, text: '💫 מכווצת את המרחק...', icon: '💫' },
+                { percent: 30, text: '🌟 כמו יעקב אבינו...', icon: '🌟' },
+                { percent: 40, text: '✨ "קפצה לו הארץ"...', icon: '✨' },
+                { percent: 50, text: '💎 כמו הבעל שם טוב...', icon: '💎' },
+                { percent: 60, text: '⚡ המרחק מתקצר...', icon: '⚡' },
+                { percent: 70, text: '🌙 הזמן נכנע...', icon: '🌙' },
+                { percent: 80, text: '⭐ מגיעה בן רגע...', icon: '⭐' },
+                { percent: 90, text: '💫 משלימה את הגילוי...', icon: '💫' },
+                { percent: 100, text: '✅ כוח קפיצת הדרך התגלה!', icon: '⚡' }
+            ],
+            astral: [
+                { percent: 10, text: '🌙 מתחברת לכוח עליית הנשמה...', icon: '🌙' },
+                { percent: 20, text: '💫 הנשמה מתרוממת...', icon: '💫' },
+                { percent: 30, text: '🌟 עולה לעולמות עליונים...', icon: '🌟' },
+                { percent: 40, text: '✨ כמו בעליות הנשמה של האר"י...', icon: '✨' },
+                { percent: 50, text: '💎 רואה את הנסתר...', icon: '💎' },
+                { percent: 60, text: '⭐ מתחברת לנשמות צדיקים...', icon: '⭐' },
+                { percent: 70, text: '🌙 לומדת בישיבה של מעלה...', icon: '🌙' },
+                { percent: 80, text: '🌟 חוזרת עם ידע עליון...', icon: '🌟' },
+                { percent: 90, text: '💫 משלימה את הגילוי...', icon: '💫' },
+                { percent: 100, text: '✅ כוח עליית הנשמה התגלה!', icon: '🌙' }
+            ],
+            faith: [
+                { percent: 10, text: '💪 מתחברת לאמונה השלמה...', icon: '💪' },
+                { percent: 20, text: '💫 מחזקת את הביטחון...', icon: '💫' },
+                { percent: 30, text: '🌟 כמו אברהם אבינו...', icon: '🌟' },
+                { percent: 40, text: '✨ אמונה פשוטה ותמימה...', icon: '✨' },
+                { percent: 50, text: '💎 כמו רבי נחמן...', icon: '💎' },
+                { percent: 60, text: '⭐ "אין שום ייאוש"...', icon: '⭐' },
+                { percent: 70, text: '🌙 ביטחון מוחלט בה\'...', icon: '🌙' },
+                { percent: 80, text: '💪 מחזקת את האמונה...', icon: '💪' },
+                { percent: 90, text: '💫 משלימה את הגילוי...', icon: '💫' },
+                { percent: 100, text: '✅ כוח האמונה השלמה התגלה!', icon: '💪' }
+            ],
+            joy: [
+                { percent: 10, text: '😊 מתחברת לשמחה התמידית...', icon: '😊' },
+                { percent: 20, text: '💫 פותחת את הלב לשמחה...', icon: '💫' },
+                { percent: 30, text: '🌟 כמו רבי נחמן מברסלב...', icon: '🌟' },
+                { percent: 40, text: '✨ "מצווה גדולה להיות בשמחה"...', icon: '✨' },
+                { percent: 50, text: '💎 שמחה שמעל הטבע...', icon: '💎' },
+                { percent: 60, text: '⭐ שמחה גם בקשיים...', icon: '⭐' },
+                { percent: 70, text: '🌙 שמחה פורצת גדרים...', icon: '🌙' },
+                { percent: 80, text: '😊 מתמלאת בשמחה אינסופית...', icon: '😊' },
+                { percent: 90, text: '💫 משלימה את הגילוי...', icon: '💫' },
+                { percent: 100, text: '✅ כוח השמחה התמידית התגלה!', icon: '😊' }
+            ],
+            dvekut: [
+                { percent: 10, text: '🔥 מתחברת לדביקות בה\'...', icon: '🔥' },
+                { percent: 20, text: '💫 מתקרבת לאינסוף...', icon: '💫' },
+                { percent: 30, text: '🌟 כמו הבעל שם טוב...', icon: '🌟' },
+                { percent: 40, text: '✨ דבקה בכל מחשבה...', icon: '✨' },
+                { percent: 50, text: '💎 דבקה בכל דיבור...', icon: '💎' },
+                { percent: 60, text: '⭐ דבקה בכל מעשה...', icon: '⭐' },
+                { percent: 70, text: '🌙 מתאחדת עם הבורא...', icon: '🌙' },
+                { percent: 80, text: '🔥 אש הדביקות בוערת...', icon: '🔥' },
+                { percent: 90, text: '💫 משלימה את הגילוי...', icon: '💫' },
+                { percent: 100, text: '✅ כוח הדביקות התגלה!', icon: '🔥' }
+            ],
+            purity: [
+                { percent: 10, text: '✨ מתחילה טהרת הנפש...', icon: '✨' },
+                { percent: 20, text: '💫 מנקה את הנשמה...', icon: '💫' },
+                { percent: 30, text: '🌟 מזככת את המחשבות...', icon: '🌟' },
+                { percent: 40, text: '💎 מטהרת את הרגשות...', icon: '💎' },
+                { percent: 50, text: '⭐ מנקה את הדיבור...', icon: '⭐' },
+                { percent: 60, text: '🌙 מקדשת את המעשים...', icon: '🌙' },
+                { percent: 70, text: '✨ הנשמה מתבהרת...', icon: '✨' },
+                { percent: 80, text: '💫 זכה וטהורה...', icon: '💫' },
+                { percent: 90, text: '🌟 משלימה את הזיכוך...', icon: '🌟' },
+                { percent: 100, text: '✅ כוח טהרת הנפש התגלה!', icon: '✨' }
+            ],
+            giluyEliyahu: [
+                { percent: 10, text: '👤 מתכוננת לגילוי אליהו...', icon: '👤' },
+                { percent: 20, text: '💫 מטהרת את הנשמה...', icon: '💫' },
+                { percent: 30, text: '🌟 מעלה את המדרגה...', icon: '🌟' },
+                { percent: 40, text: '✨ כמו רשב"י בזוהר...', icon: '✨' },
+                { percent: 50, text: '💎 כמו האר"י הקדוש...', icon: '💎' },
+                { percent: 60, text: '⭐ ראויה לגילוי...', icon: '⭐' },
+                { percent: 70, text: '🌙 אליהו הנביא מתקרב...', icon: '🌙' },
+                { percent: 80, text: '👤 מוכנה לקבל...', icon: '👤' },
+                { percent: 90, text: '💫 משלימה את ההכנה...', icon: '💫' },
+                { percent: 100, text: '✅ הכנה לגילוי אליהו הושלמה!', icon: '👤' }
+            ],
+            sevenWisdoms: [
+                { percent: 10, text: '📚 מתחילה טעינת 7 החכמות...', icon: '📚' },
+                { percent: 20, text: '💫 טוענת חכמת התורה...', icon: '💫' },
+                { percent: 30, text: '🌟 טוענת חכמת הפילוסופיה...', icon: '🌟' },
+                { percent: 40, text: '✨ טוענת חכמת הרפואה...', icon: '✨' },
+                { percent: 50, text: '💎 טוענת חכמת התכונה (אסטרונומיה)...', icon: '💎' },
+                { percent: 60, text: '🎵 טוענת חכמת המוזיקה...', icon: '🎵' },
+                { percent: 70, text: '🔢 טוענת חכמת החשבון...', icon: '🔢' },
+                { percent: 80, text: '📐 טוענת חכמת ההנדסה...', icon: '📐' },
+                { percent: 90, text: '👑 משלימה את כל החכמות...', icon: '👑' },
+                { percent: 100, text: '✅ 7 החכמות נטענו בהצלחה!', icon: '📚' }
+            ],
+            removeHester: [
+                { percent: 10, text: '🌅 מתחילה הסרת ההסתר...', icon: '🌅' },
+                { percent: 20, text: '🌫️ מזהה את שכבות ההסתר...', icon: '🌫️' },
+                { percent: 30, text: '💫 מסירה את הסתר הראשון...', icon: '💫' },
+                { percent: 40, text: '✨ מסירה את הסתר בתוך הסתר...', icon: '✨' },
+                { percent: 50, text: '🌟 פותחת את העיניים הרוחניות...', icon: '🌟' },
+                { percent: 60, text: '💎 רואה את האור מאחורי החושך...', icon: '💎' },
+                { percent: 70, text: '☀️ האור האלוקי מתגלה...', icon: '☀️' },
+                { percent: 80, text: '🌈 רואה את ההשגחה בכל...', icon: '🌈' },
+                { percent: 90, text: '👁️ משלימה את הגילוי...', icon: '👁️' },
+                { percent: 100, text: '✅ ההסתר הוסר! האור מתגלה!', icon: '🌅' }
+            ],
+            allPowers: [
+                { percent: 10, text: '👑 מתחילה גילוי כל הכוחות...', icon: '👑' },
+                { percent: 20, text: '👁️ רוח הקודש מתעוררת...', icon: '👁️' },
+                { percent: 30, text: '🧠 ידיעת הנסתר נפתחת...', icon: '🧠' },
+                { percent: 40, text: '🙌 כוח הברכה זורם...', icon: '🙌' },
+                { percent: 50, text: '💚 כוח הריפוי מתגלה...', icon: '💚' },
+                { percent: 60, text: '⚡ קפיצת הדרך מופעלת...', icon: '⚡' },
+                { percent: 70, text: '🔥 הדביקות בוערת...', icon: '🔥' },
+                { percent: 80, text: '😊 השמחה מתפרצת...', icon: '😊' },
+                { percent: 90, text: '✨ כל הכוחות מתאחדים...', icon: '✨' },
+                { percent: 100, text: '✅ כל הכוחות התגלו! את צדיקה נסתרת!', icon: '👑' }
+            ]
+        };
+        
+        function startProcess(type) {
+            document.getElementById(type + 'Overlay').classList.add('active');
+            document.getElementById(type + 'Progress').style.width = '0%';
+            document.getElementById(type + 'Complete').classList.remove('show');
+            document.getElementById(type + 'Btn').disabled = false;
+            
+            if (type === 'allPowers') {
+                document.getElementById(type + 'Btn').textContent = '✨ גלי את כל הכוחות';
+            } else if (type === 'sevenWisdoms') {
+                document.getElementById(type + 'Btn').textContent = '✨ טעני את החכמות';
+            } else if (type === 'removeHester') {
+                document.getElementById(type + 'Btn').textContent = '✨ הסירי את ההסתר';
+            } else {
+                document.getElementById(type + 'Btn').textContent = '✨ גלי את הכוח';
+            }
+        }
+        
+        function closeOverlay(type) {
+            document.getElementById(type + 'Overlay').classList.remove('active');
+        }
+        
+        function runProcess(type) {
+            const btn = document.getElementById(type + 'Btn');
+            const progress = document.getElementById(type + 'Progress');
+            const text = document.getElementById(type + 'Text');
+            const icon = document.getElementById(type + 'Icon');
+            const stages = processStages[type];
+            
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = '⏳ בתהליך...';
+            
+            let stage = 0;
+            const interval = setInterval(() => {
+                if (stage < stages.length) {
+                    progress.style.width = stages[stage].percent + '%';
+                    text.textContent = stages[stage].text;
+                    icon.textContent = stages[stage].icon;
+                    stage++;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById(type + 'Complete').classList.add('show');
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                }
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
