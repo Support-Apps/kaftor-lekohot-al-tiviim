@@ -313,6 +313,11 @@
             <div class="button-title">חלומות נבואיים</div>
             <div class="button-desc">גילויים בחלום</div>
         </div>
+        <div class="power-button" onclick="startProcess('dreamWorld')">
+            <span class="button-icon">🌙</span>
+            <div class="button-title">העולם הזה דמוי חלום</div>
+            <div class="button-desc">ידיעה שהמציאות כחלום</div>
+        </div>
     </div>
     
     <div class="section-title">✨ כוחות השפעה</div>
@@ -374,6 +379,11 @@
             <span class="button-icon">✨</span>
             <div class="button-title">טהרת הנפש</div>
             <div class="button-desc">ניקוי וזיכוך הנשמה</div>
+        </div>
+        <div class="power-button mint" onclick="startProcess('shiviti')">
+            <span class="button-icon">👁️</span>
+            <div class="button-title">שויתי ה' לנגדי תמיד</div>
+            <div class="button-desc">מודעות תמידית לנוכחות ה'</div>
         </div>
     </div>
     
@@ -465,6 +475,23 @@
             <div class="completion-message" id="prophecyComplete">
                 <p style="font-size: 1.3em; margin-bottom: 10px;">✅ כוח החלומות הנבואיים התגלה!</p>
                 <p>חלומותייך יגלו לך סודות.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dream World Overlay -->
+    <div class="overlay" id="dreamWorldOverlay">
+        <button class="close-overlay" onclick="closeOverlay('dreamWorld')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="dreamWorldIcon">🌙</div>
+            <div class="animation-text" id="dreamWorldText">מתחברת לידיעה העמוקה...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="dreamWorldProgress"></div>
+            </div>
+            <button class="install-btn" id="dreamWorldBtn" onclick="runProcess('dreamWorld')">✨ גלי את הידיעה</button>
+            <div class="completion-message" id="dreamWorldComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ הידיעה התגלתה!</p>
+                <p>את יודעת שהעולם הזה דמוי חלום.</p>
             </div>
         </div>
     </div>
@@ -639,6 +666,23 @@
         </div>
     </div>
 
+    <!-- Shiviti Overlay -->
+    <div class="overlay" id="shivitiOverlay">
+        <button class="close-overlay" onclick="closeOverlay('shiviti')">✕</button>
+        <div class="overlay-content">
+            <div class="animation-icon" id="shivitiIcon">👁️</div>
+            <div class="animation-text" id="shivitiText">מתחברת לשויתי ה' לנגדי תמיד...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="shivitiProgress"></div>
+            </div>
+            <button class="install-btn" id="shivitiBtn" onclick="runProcess('shiviti')">✨ גלי את הכוח</button>
+            <div class="completion-message" id="shivitiComplete">
+                <p style="font-size: 1.3em; margin-bottom: 10px;">✅ שויתי ה' לנגדי תמיד!</p>
+                <p>את במודעות תמידית לנוכחות ה'.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Giluy Eliyahu Overlay -->
     <div class="overlay" id="giluyEliyahuOverlay">
         <button class="close-overlay" onclick="closeOverlay('giluyEliyahu')">✕</button>
@@ -756,6 +800,18 @@
                 { percent: 80, text: '⭐ רואה את העתיד...', icon: '⭐' },
                 { percent: 90, text: '📜 משלימה את הגילוי...', icon: '📜' },
                 { percent: 100, text: '✅ כוח החלומות הנבואיים התגלה!', icon: '📜' }
+            ],
+            dreamWorld: [
+                { percent: 10, text: '🌙 מתחברת לידיעה העמוקה...', icon: '🌙' },
+                { percent: 20, text: '💫 רואה את העולם מזווית חדשה...', icon: '💫' },
+                { percent: 30, text: '✨ מבינה שהכל זמני וחולף...', icon: '✨' },
+                { percent: 40, text: '🌟 כמו חלום שמתפוגג בבוקר...', icon: '🌟' },
+                { percent: 50, text: '💎 רק הנשמה נצחית...', icon: '💎' },
+                { percent: 60, text: '👁️ רואה מעבר לחומר...', icon: '👁️' },
+                { percent: 70, text: '🦋 העולם הזה כמסך דק...', icon: '🦋' },
+                { percent: 80, text: '☀️ האמת מאחורי האשליה...', icon: '☀️' },
+                { percent: 90, text: '🌙 משלימה את הידיעה...', icon: '🌙' },
+                { percent: 100, text: '✅ הידיעה התגלתה! העולם הזה דמוי חלום.', icon: '🌙' }
             ],
             blessing: [
                 { percent: 10, text: '🙌 מתחברת לכוח הברכה...', icon: '🙌' },
@@ -877,6 +933,18 @@
                 { percent: 90, text: '🌟 משלימה את הזיכוך...', icon: '🌟' },
                 { percent: 100, text: '✅ כוח טהרת הנפש התגלה!', icon: '✨' }
             ],
+            shiviti: [
+                { percent: 10, text: '👁️ מתחברת לשויתי ה\' לנגדי תמיד...', icon: '👁️' },
+                { percent: 20, text: '💫 פותחת את עיני הנשמה...', icon: '💫' },
+                { percent: 30, text: '🌟 רואה את נוכחות ה\' בכל...', icon: '🌟' },
+                { percent: 40, text: '✨ מרגישה את ההשגחה...', icon: '✨' },
+                { percent: 50, text: '💎 ה\' נמצא כאן עכשיו...', icon: '💎' },
+                { percent: 60, text: '⭐ בכל מקום ובכל רגע...', icon: '⭐' },
+                { percent: 70, text: '🌙 מלוא כל הארץ כבודו...', icon: '🌙' },
+                { percent: 80, text: '🔥 מודעות תמידית...', icon: '🔥' },
+                { percent: 90, text: '👁️ משלימה את ההתחברות...', icon: '👁️' },
+                { percent: 100, text: '✅ שויתי ה\' לנגדי תמיד!', icon: '👁️' }
+            ],
             giluyEliyahu: [
                 { percent: 10, text: '👤 מתכוננת לגילוי אליהו...', icon: '👤' },
                 { percent: 20, text: '💫 מטהרת את הנשמה...', icon: '💫' },
@@ -939,6 +1007,8 @@
                 document.getElementById(type + 'Btn').textContent = '✨ טעני את החכמות';
             } else if (type === 'removeHester') {
                 document.getElementById(type + 'Btn').textContent = '✨ הסירי את ההסתר';
+            } else if (type === 'dreamWorld') {
+                document.getElementById(type + 'Btn').textContent = '✨ גלי את הידיעה';
             } else {
                 document.getElementById(type + 'Btn').textContent = '✨ גלי את הכוח';
             }
